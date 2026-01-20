@@ -1,0 +1,13 @@
+.sidebar-container {
+  width: 300px; // Érdemes kicsit szélesebbre venni a szövegek miatt
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--p-content-border-color);
+  background: var(--p-content-background);
+  overflow-y: auto; // Itt legyen a belső scroll, ha sok a kerület
+}
+
+.sidebar-wrapper {
+  height: 100%; // Vegye át a szülő magasságát
+}

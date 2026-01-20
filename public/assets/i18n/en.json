@@ -1,0 +1,38 @@
+{
+  "USER_MANAGEMENT": {
+    "TITLE": "User Management",
+    "FIELDS": {
+      "USERNAME": "Name",
+      "PASSWORD": "Password",
+      "EMAIL": "Email Address",
+      "ROLE": "Role"
+    },
+    "PLACEHOLDERS": {
+      "USERNAME": "Enter name",
+      "PASSWORD": "Enter password",
+      "EMAIL": "example@email.com",
+      "ROLE": "e.g. ADMIN"
+    },
+    "ERRORS": {
+      "USERNAME_REQUIRED": "A valid name is required.",
+      "PASSWORD_REQUIRED": "A valid password is required (min. 8 characters).",
+      "EMAIL_REQUIRED": "A valid email address is required.",
+      "ROLE_REQUIRED": "A valid role is required."
+    },
+    "BUTTONS": {
+      "SUBMIT": "Submit User",
+      "RESET": "Reset"
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Success",
+      "SUCCESS_DETAIL": "User has been saved successfully!",
+      "ERROR_TITLE": "Error",
+      "ERROR_DETAIL": "Failed to save the user."
+    }
+  },
+  "COMMON": {
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "BACK": "Back"
+  }
+}

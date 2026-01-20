@@ -1,0 +1,51 @@
+<div class="flex h-full w-full">
+  <app-sidebar
+    (buildingSelected)="selectedBuildingId = $event">
+
+  </app-sidebar>
+
+  <main class="content-area">
+    <div class="flex gap-3 h-full">
+      <div class="flex-1 bg-gray-100 p-2 border-round">
+        <h3 class="text-center">Reported</h3>
+        @for (ticket of orderedTickets().reported; track ticket.id) {
+          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
+        }
+      </div>
+      <div class="flex-1 bg-gray-100 p-2 border-round">
+        <h3 class="text-center">Assigned</h3>
+        @for (ticket of orderedTickets().assigned; track ticket.id) {
+          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
+        }
+      </div>
+      <div class="flex-1 bg-gray-100 p-2 border-round">
+        <h3 class="text-center">In Progress</h3>
+        @for (ticket of orderedTickets().inProgress; track ticket.id) {
+          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
+        }
+      </div>
+      <div class="flex-1 bg-gray-100 p-2 border-round">
+        <h3 class="text-center">Done</h3>
+        @for (ticket of orderedTickets().finished; track ticket.id) {
+          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
+        }
+      </div>
+    </div>
+
+    <p-button
+      icon="pi pi-plus"
+      [rounded]="false"
+      severity="primary"
+      size="large"
+      class="floating-add-btn"
+      (onClick)="showAddTicketDialog()"
+      pTooltip="Új ticket felvétele"
+      tooltipPosition="right">
+    </p-button>
+  </main>
+</div>
+<app-create-ticket
+  [(visible)]="isDialogVisible"
+  [buildingId]="selectedBuildingId"
+  (ticketSaved)="handleTicketSaved()">
+</app-create-ticket>

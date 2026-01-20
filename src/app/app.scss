@@ -1,0 +1,12 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; // Megakadályozza a teljes oldal görgetését
+}
+
+.main-wrapper {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden; // A belső elemeknek adjuk át a görgetés jogát
+}

@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  background-color: var(--p-content-background); /* Vagy egy fix világosszürke: #f4f7fb */
+  min-height: 100%;
+}
+
+.management-container {
+  width: 80%;      /* A képernyő szélességének 80%-a */
+  margin: 0 auto;  /* Vízszintes középre igazítás */
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mb3 {
+  margin-bottom: 1rem;
+}
+
+/* Lebegő gomb stílusa */
+:host ::ng-deep .floating-add-btn {
+  //position: fixed;
+  //bottom: 3rem;
+  //right: 3rem;
+  //z-index: 1000;
+
+  .p-button {
+    width: 4rem;
+    height: 4rem;
+    margin: 0.5rem;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1) rotate(90deg);
+    }
+  }
+}
+
+/* Táblázat sorainak finomabb hover-je */
+:host ::ng-deep .p-datatable-body > tr:hover {
+  background-color: rgba(var(--p-primary-color-rgb), 0.04) !important;
+}

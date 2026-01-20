@@ -1,0 +1,50 @@
+<p-dialog
+  [header]="building?.id ? 'Épület szerkesztése' : 'Új épület hozzáadása'"
+  [(visible)]="visible"
+  (onHide)="close()"
+  [modal]="true"
+  [style]="{ width: '400px' }">
+
+  <form [formGroup]="buildingForm" class="flex flex-column gap-4 mt-2">
+
+    <div class="flex flex-column gap-2">
+      <label for="name" class="font-semibold">Épület neve</label>
+      <input pInputText id="name" formControlName="name" placeholder="Pl. Penzinger udvar"/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="postCode" class="font-semibold">Irányítószám</label>
+      <input pInputText id="postCode" formControlName="postCode" placeholder="1140"/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="city" class="font-semibold">Város</label>
+      <input pInputText id="city" formControlName="city"/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="address" class="font-semibold">Utca, házszám</label>
+      <input pInputText id="address" formControlName="address" placeholder="Minta utca 12."/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="contactPerson" class="font-semibold">Contact person</label>
+      <input pInputText id="address" formControlName="contactPerson" placeholder="John Doe"/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="contactPhone" class="font-semibold">Contact phone</label>
+      <input pInputText id="contactPhone" formControlName="contactPhone" placeholder="0660-7778562"/>
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="buildingType" class="font-semibold">Type</label>
+      <input pInputText id="buildingType" formControlName="buildingType" placeholder="Residental"/>
+    </div>
+
+    <div class="flex justify-content-end gap-2 mt-2">
+      <p-button label="Mégse" severity="secondary" [text]="true" (onClick)="close()"/>
+      <p-button label="Mentés" icon="pi pi-check" (onClick)="save()" [disabled]="buildingForm.invalid"/>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,39 @@
+<div class="card flex justify-content-center">
+  <form [formGroup]="usersForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3 w-full md:w-30rem">
+
+    <div class="flex flex-column gap-2">
+      <label for="name">{{ 'USER_MANAGEMENT.FIELDS.USERNAME' | translate }}</label>
+      <input pInputText id="name" formControlName="username" [placeholder]="'USER_MANAGEMENT.PLACEHOLDERS.USERNAME' | translate"/>
+      @if (usersForm.get('username')?.invalid && usersForm.get('username')?.touched) {
+        <small class="p-error">{{ 'USER_MANAGEMENT.ERRORS.USERNAME_REQUIRED' | translate }}</small>
+      }
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="password">{{ 'USER_MANAGEMENT.FIELDS.PASSWORD' | translate }}</label>
+      <input pInputText id="password" type="password" formControlName="password" [placeholder]="'USER_MANAGEMENT.PLACEHOLDERS.PASSWORD' | translate"/>
+      @if (usersForm.get('password')?.invalid && usersForm.get('password')?.touched) {
+        <small class="p-error">{{ 'USER_MANAGEMENT.ERRORS.PASSWORD_REQUIRED' | translate }}</small>
+      }
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="email">{{ 'USER_MANAGEMENT.FIELDS.EMAIL' | translate }}</label>
+      <input pInputText id="email" formControlName="email" [placeholder]="'USER_MANAGEMENT.PLACEHOLDERS.EMAIL' | translate"/>
+      @if (usersForm.get('email')?.invalid && usersForm.get('email')?.touched) {
+        <small class="p-error">{{ 'USER_MANAGEMENT.ERRORS.EMAIL_REQUIRED' | translate }}</small>
+      }
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="role">{{ 'USER_MANAGEMENT.FIELDS.ROLE' | translate }}</label>
+      <input pInputText id="role" formControlName="role" [placeholder]="'USER_MANAGEMENT.PLACEHOLDERS.ROLE' | translate"/>
+      @if (usersForm.get('role')?.invalid && usersForm.get('role')?.touched) {
+        <small class="p-error">{{ 'USER_MANAGEMENT.ERRORS.ROLE_REQUIRED' | translate }}</small>
+      }
+    </div>
+
+    <p-button [label]="'USER_MANAGEMENT.BUTTONS.SUBMIT' | translate" type="submit" [disabled]="usersForm.invalid" icon="pi pi-check"></p-button>
+
+  </form>
+</div>

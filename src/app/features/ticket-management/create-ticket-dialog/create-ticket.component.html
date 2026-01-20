@@ -1,0 +1,36 @@
+<p-dialog
+  header="Új hibajegy rögzítése"
+  [visible]="visible"
+  (visibleChange)="close()"
+  [modal]="true"
+  [style]="{ width: '450px' }">
+
+  <form [formGroup]="ticketForm" class="flex flex-column gap-3">
+    <div class="flex flex-column gap-2">
+      <label for="title">Megnevezés</label>
+      <input pInputText id="title" formControlName="title" />
+    </div>
+
+    <div class="flex flex-column gap-2">
+      <label for="priority">Prioritás</label>
+      <p-select
+        [options]="priorities"
+        formControlName="priority"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Válassz prioritást"
+        class="w-full"
+        appendTo="body">
+      </p-select>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="description">Leírás</label>
+      <textarea pInputTextarea id="description" formControlName="description" rows="5"></textarea>
+    </div>
+
+    <div class="flex justify-content-end gap-2 mt-3">
+      <p-button label="Mégse" severity="secondary" [text]="true" (onClick)="close()"></p-button>
+      <p-button label="Mentés" (onClick)="saveTicket()" [disabled]="ticketForm.invalid"></p-button>
+    </div>
+  </form>
+</p-dialog>

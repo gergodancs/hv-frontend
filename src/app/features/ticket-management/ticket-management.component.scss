@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.content-area {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: var(--p-content-background);
+  position: relative;
+}
+
+.floating-add-btn {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
