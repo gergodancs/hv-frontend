@@ -17,11 +17,11 @@ export interface TicketDTO {
     description: string;
     priority: Priority;
     status: TicketStatus;
-    createdAt: string;
-    startedAt: string;
+    createdAt?: string;
+    startedAt?: string;
     finishedAt?: string;
     buildingId: number;
-    mechanicId: number;
+    mechanicId?: number;
 }
 
 

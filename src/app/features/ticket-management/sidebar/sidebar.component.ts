@@ -1,23 +1,42 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {PanelMenu} from 'primeng/panelmenu'; // v21 import
 import {MenuItem} from 'primeng/api';
-import {BuildingDTO} from '../../../api/generated';
+import {BuildingDTO, BuildingsService} from '../../../api/generated';
+import {map, Observable} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [PanelMenu],
+  imports: [PanelMenu, AsyncPipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent {
+
+  private buildingService = inject(BuildingsService);
+
+  private buildings$ = this.buildingService.getAllBuildings();
+
   items: Array<MenuItem> = [];
 
   @Output() buildingSelected = new EventEmitter<number | null>();
 
-  ngOnInit() {
-    this.items = this.generateMenuItems();
-  }
+
+  // A TypeScript fájlban:
+  menuItems$: Observable<MenuItem[]> = this.buildings$.pipe(
+    map(buildings => {
+      return this.districts.map(district => ({
+        label: `${district} district`,
+        items: buildings
+          .filter(b => b.postCode === district)
+          .map(building => ({
+            label: building.address,
+            command: () => this.buildingSelected.emit(building.id)
+          }))
+      }));
+    })
+  );
 
 
   dummyBuildings: BuildingDTO[] = [
@@ -52,16 +71,6 @@ export class SidebarComponent implements OnInit{
     1010, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1100, 1110, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200,
   ];
 
-  generateMenuItems(): MenuItem[] {
-    return this.districts.map(district => ({
-      label: `${district} district`,
-      icon: '',
-      items: this.dummyBuildings.filter(building => building.postCode === district).map(building => ({
-        label: building.address,
-        command: () => this.buildingSelected.emit(building.id)
-      }))
-    }));
-  }
 
   onMenuItemClick(district: number, buildingId?: number) {
     //load tickets for selected district and building

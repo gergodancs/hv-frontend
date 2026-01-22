@@ -23,3 +23,75 @@
     transform: scale(1.1);
   }
 }
+
+.content-area {
+  padding: 1.5rem;
+  overflow-x: auto; // Ha túl sok oszlop lenne
+}
+
+.flex-1 {
+  min-width: 300px; // Megakadályozza, hogy túl vékonyak legyenek az oszlopok
+  max-width: 400px;
+  height: calc(100vh - 100px); // Fix magasság a görgetéshez
+  display: flex;
+  flex-direction: column;
+}
+
+// Görgethető terület a kártyáknak az oszlopon belül
+.ticket-list-container {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0.5rem;
+
+  // Szép görgetősáv (opcionális)
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+  }
+}
+
+.ticket-list-container {
+  min-height: 150px; // Nagyon fontos: üres oszlopba is lehessen dobni!
+}
+
+.cursor-move {
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+
+/* Az oszlop belső konténere, amibe dobálunk */
+.ticket-list-container {
+  min-height: 200px; /* Nagyon fontos: ha üres az oszlop, enélkül nem tudsz belepakolni! */
+  display: block;
+}
+
+/* Húzás közben a kártya stílusa */
+.cdk-drag-preview {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+/* A hely, ahová érkezni fog a kártya (szaggatott vonal) */
+.custom-placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 100px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  margin-bottom: 0.5rem;
+}
+
+/* Animáció a többi kártyának, amikor elmozdulnak az útbol */
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

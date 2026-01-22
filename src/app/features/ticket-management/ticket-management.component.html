@@ -1,35 +1,131 @@
 <div class="flex h-full w-full">
-  <app-sidebar
-    (buildingSelected)="selectedBuildingId = $event">
-
-  </app-sidebar>
+  <app-sidebar (buildingSelected)="selectedBuildingId = $event"></app-sidebar>
 
   <main class="content-area">
-    <div class="flex gap-3 h-full">
-      <div class="flex-1 bg-gray-100 p-2 border-round">
+    <div class="flex gap-3 h-full" cdkDropListGroup>
+
+      <div class="flex-1 bg-gray-100 p-2 border-round flex flex-column">
         <h3 class="text-center">Reported</h3>
-        @for (ticket of orderedTickets().reported; track ticket.id) {
-          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
-        }
+        <div
+          cdkDropList
+          [cdkDropListData]="tableItems().reported"
+          (cdkDropListDropped)="onDrop($event, 'REPORTED')"
+          class="ticket-list-container flex-1">
+
+          @for (ticket of tableItems().reported; track ticket.id) {
+            <div cdkDrag [cdkDragData]="ticket" class="cursor-move">
+              <p-card [header]="ticket.description" styleClass="mb-2 shadow-1 border-round custom-card">
+                <ng-template pTemplate="subtitle">
+                  <div class="flex align-items-center gap-2">
+                    <i class="pi pi-map-marker text-sm"></i>
+                    <span>{{ ticket.building?.address }}</span>
+                  </div>
+                </ng-template>
+                <p class="m-0 text-700 text-sm">{{ ticket.description | slice:0:100 }}...</p>
+                <ng-template pTemplate="footer">
+                  <div class="flex justify-content-between align-items-center">
+                    <p-tag [value]="ticket.priority" [severity]="getPrioritySeverity(ticket.priority)"></p-tag>
+                    <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" size="small"></p-button>
+                  </div>
+                </ng-template>
+              </p-card>
+              <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            </div>
+          }
+        </div>
       </div>
-      <div class="flex-1 bg-gray-100 p-2 border-round">
+
+      <div class="flex-1 bg-gray-100 p-2 border-round flex flex-column">
         <h3 class="text-center">Assigned</h3>
-        @for (ticket of orderedTickets().assigned; track ticket.id) {
-          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
-        }
+        <div
+          cdkDropList
+          [cdkDropListData]="tableItems().assigned"
+          (cdkDropListDropped)="onDrop($event, 'ASSIGNED')"
+          class="ticket-list-container flex-1">
+
+          @for (ticket of tableItems().assigned; track ticket.id) {
+            <div cdkDrag [cdkDragData]="ticket" class="cursor-move">
+              <p-card [header]="ticket.description" styleClass="mb-2 shadow-1 border-round custom-card">
+                <ng-template pTemplate="subtitle">
+                  <div class="flex align-items-center gap-2"><i
+                    class="pi pi-map-marker text-sm"></i><span>{{ ticket.building?.address }}</span></div>
+                </ng-template>
+                <p class="m-0 text-700 text-sm">{{ ticket.description | slice:0:100 }}...</p>
+                <ng-template pTemplate="footer">
+                  <div class="flex justify-content-between align-items-center">
+                    <p-tag [value]="ticket.priority" [severity]="getPrioritySeverity(ticket.priority)"></p-tag>
+                    <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" size="small"></p-button>
+                  </div>
+                </ng-template>
+              </p-card>
+              <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            </div>
+          }
+        </div>
       </div>
-      <div class="flex-1 bg-gray-100 p-2 border-round">
-        <h3 class="text-center">In Progress</h3>
-        @for (ticket of orderedTickets().inProgress; track ticket.id) {
-          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
-        }
+
+      <div class="flex-1 bg-gray-100 p-2 border-round flex flex-column">
+        <h3 class="text-center">In progress</h3>
+        <div
+          cdkDropList
+          [cdkDropListData]="tableItems().inProgress"
+          (cdkDropListDropped)="onDrop($event, 'IN_PROGRESS')"
+          class="ticket-list-container flex-1">
+
+          @for (ticket of tableItems().inProgress; track ticket.id) {
+            <div cdkDrag [cdkDragData]="ticket" class="cursor-move">
+              <p-card [header]="ticket.description" styleClass="mb-2 shadow-1 border-round custom-card">
+                <ng-template pTemplate="subtitle">
+                  <div class="flex align-items-center gap-2">
+                    <i class="pi pi-map-marker text-sm"></i>
+                    <span>{{ ticket.building?.address }}</span>
+                  </div>
+                </ng-template>
+                <p class="m-0 text-700 text-sm">{{ ticket.description | slice:0:100 }}...</p>
+                <ng-template pTemplate="footer">
+                  <div class="flex justify-content-between align-items-center">
+                    <p-tag [value]="ticket.priority" [severity]="getPrioritySeverity(ticket.priority)"></p-tag>
+                    <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" size="small"></p-button>
+                  </div>
+                </ng-template>
+              </p-card>
+              <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            </div>
+          }
+        </div>
       </div>
-      <div class="flex-1 bg-gray-100 p-2 border-round">
+
+      <div class="flex-1 bg-gray-100 p-2 border-round flex flex-column">
         <h3 class="text-center">Done</h3>
-        @for (ticket of orderedTickets().finished; track ticket.id) {
-          <p-card header="Csöpög a csap" subheader="3. emelet 12.">...</p-card>
-        }
+        <div
+          cdkDropList
+          [cdkDropListData]="tableItems().finished"
+          (cdkDropListDropped)="onDrop($event, 'FINISHED')"
+          class="ticket-list-container flex-1">
+
+          @for (ticket of tableItems().finished; track ticket.id) {
+            <div cdkDrag [cdkDragData]="ticket" class="cursor-move">
+              <p-card [header]="ticket.description" styleClass="mb-2 shadow-1 border-round custom-card">
+                <ng-template pTemplate="subtitle">
+                  <div class="flex align-items-center gap-2">
+                    <i class="pi pi-map-marker text-sm"></i>
+                    <span>{{ ticket.building?.address }}</span>
+                  </div>
+                </ng-template>
+                <p class="m-0 text-700 text-sm">{{ ticket.description | slice:0:100 }}...</p>
+                <ng-template pTemplate="footer">
+                  <div class="flex justify-content-between align-items-center">
+                    <p-tag [value]="ticket.priority" [severity]="getPrioritySeverity(ticket.priority)"></p-tag>
+                    <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" size="small"></p-button>
+                  </div>
+                </ng-template>
+              </p-card>
+              <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            </div>
+          }
+        </div>
       </div>
+
     </div>
 
     <p-button
@@ -45,7 +141,11 @@
   </main>
 </div>
 <app-create-ticket
+
   [(visible)]="isDialogVisible"
+
   [buildingId]="selectedBuildingId"
+
   (ticketSaved)="handleTicketSaved()">
+
 </app-create-ticket>

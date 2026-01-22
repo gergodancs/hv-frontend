@@ -53,6 +53,7 @@ export class CreateTicketComponent implements OnInit {
   ticketForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
+    reporterEmail: ['', Validators.required],
     priority: ['MEDIUM', Validators.required],
     buildingId: [null, Validators.required]
   });
